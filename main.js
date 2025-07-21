@@ -1,5 +1,5 @@
 // Change this flag to control the message
-const activated = true;
+const activated = false;
 
 const message = activated
   ? "meet me at midnight"
