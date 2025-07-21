@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
   <title>Secret Message</title>
+  <script src="main.js?v=1.0.4" defer></script> <!-- Add `defer` to load after DOM -->
 </head>
 <body>
   <h1 id="message"></h1>
-
-  <script>
-    // Simulate "activation" with a flag
-    const activated = true; // Change to true when you want to switch message
-
-    const message = activated ? "meet me at midnight" : "stop being precoce";
-    document.getElementById("message").textContent = message;
-  </script>
 </body>
 </html>
