@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secret Message</title>
+</head>
+<body>
+  <h1 id="message"></h1>
+
+  <script>
+    // Simulate "activation" with a flag
+    const activated = false; // Change to true when you want to switch message
+
+    const message = activated ? "meet me at midnight" : "stop being precoce";
+    document.getElementById("message").textContent = message;
+  </script>
+</body>
+</html>
