@@ -1,173 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Algo incrível está para chegar...</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    :root {
+      --card-bg: #ffffff;
+      --wallpaper-opacity: 0.1;
+      --shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    html, body { height: 100%; }
     body {
       font-family: sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f5f5f5;
     }
-	
-	
-	#login-wrapper {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100vh;
-		background-image: url('hearts.jpg'); /* ← update filename if needed */
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-	}
-	
-    #login-page {
-      max-width: 400px;
-      margin: 100px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
+    .center { text-align: center; }
 
+    /* LOGIN */
+    #login-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100svh; /* better than 100vh on mobile */
+      background-image: url('hearts.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    #login-page {
+      max-width: 420px;
+      width: calc(100% - 2rem);
+      margin: 6vh auto;
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
     #login-page input {
-      padding: 10px;
-      width: 80%;
+      padding: 12px;
+      width: 90%;
       margin-bottom: 10px;
     }
-
     #login-page button {
       padding: 10px 20px;
+      cursor: pointer;
     }
 
-    #protected-content {
-      display: none;
+    /* PROTECTED AREA */
+    #protected-content { display: none; }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
     }
-	
-		.layout {
-	  display: flex;
-	  min-height: 100vh;
-	}
 
-	/* LEFT SIDE (Image) */
-	.left {
-	  flex: 1;
-	  background-image: url('Rodri2.jpg'); /* Replace with your image path */
-	  background-size: contain;
-	  background-position: center;
-	  background-repeat: no-repeat;
-	  background-position: left;    /* centers image */
-	  background-attachment: scroll;
-	  min-height: 100%;
-	  position: relative;
-	}
+    /* LEFT (Image) */
+    .left {
+      flex: 1;
+      background-image: url('Rodri2.jpg'); /* update path if needed */
+      background-size: cover;           /* was contain */
+      background-position: center left; /* nicer crop */
+      background-repeat: no-repeat;
+      min-height: 100%;
+      position: relative;
+    }
 
-	/* RIGHT SIDE (Content) */
-	.right {
-	  position: relative;
-	  flex: 1;
-	  padding: 2rem;
-	  background-color: rgba(255, 255, 255, 0.85);
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: flex-start;
-	  overflow: auto;
-	  min-height: 100%;
-	  z-index: 1;
-	}
+    /* RIGHT (Content) */
+    .right {
+      position: relative;
+      flex: 1;
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.85);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: auto;
+      min-height: 100%;
+      z-index: 1;
+    }
 
-	/* Transparent wallpaper layer */
-	.right::before {
-	  content: "";
-	  position: absolute;
-	  inset: 0;
-	  background-image: url('hearts.jpg'); /* or an online link */
-	  background-repeat: repeat;
-	  background-size: contain;
-	  background-attachment: scroll;
-	  opacity: 0.1; /* 🔁 change this value from 0 (invisible) to 1 (fully visible) */
-	  z-index: 0;
-	  pointer-events: none;
-	}
+    /* Transparent wallpaper layer */
+    .right::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('hearts.jpg');
+      background-repeat: repeat;
+      background-size: 300px;
+      opacity: var(--wallpaper-opacity);
+      z-index: 0;
+      pointer-events: none;
+    }
 
-	h2 {
-	  margin-bottom: 1rem;
-	}
+    h1, h2 { margin: 0 0 1rem 0; }
 
-	table {
-	  width: 100%;
-	  border-collapse: collapse;
-	  text-align: left;
-	}
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      position: relative;
+      z-index: 1; /* above the ::before wallpaper */
+      background: rgba(255,255,255,0.9);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ccc;
+      vertical-align: middle;
+    }
+    th { background-color: rgba(240, 240, 240, 0.85); }
 
-	th, td {
-	  padding: 12px;
-	  border-bottom: 1px solid #ccc;
-	}
+    /* NEW: responsive table wrapper */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;                 /* horizontal scroll if needed */
+      -webkit-overflow-scrolling: touch;
+    }
+    #ranking-table { min-width: 480px; } /* avoid over-squashing on phones */
 
-	th {
-	  background-color: rgba(240, 240, 240, 0.85);
-	}
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .layout {
+        flex-direction: column;      /* stack instead of side-by-side */
+        min-height: 100svh;
+      }
+      .left {
+        width: 100%;
+        min-height: 40vh;            /* give image some height on phones */
+        background-size: cover;
+        background-position: center; /* nicer crop on small screens */
+      }
+      .right {
+        flex: unset;
+        min-height: auto;
+        padding: 1rem;
+      }
+      th, td { padding: 10px; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 420px) {
+      #ranking-table { min-width: 420px; }
+      #login-page { margin: 3vh auto; padding: 16px; }
+    }
   </style>
 </head>
 <body>
 
   <!-- Login Page -->
   <div id="login-wrapper">
-  <div id="login-page">
-    <h1>Algo incrível está para chegar...</h1>
-    <p>Sentes-te pronto? Está difícil aguentar o calor 🥵</p>
-    <input type="password" id="password-input" placeholder="Adivinha" />
-    <br />
-    <button onclick="checkPassword()">Estou pronto 😏</button>
-    <p id="error-message" style="color: red;"></p>
-	<p> <strong> CERIMÓNIA CELEBRATÓRIA </strong> - 17 de Agosto </p>
-	<p class="center"> <strong> DRESSCODE: </strong> Formal </p>
-	<p class="center"> Mais informações em breve... Estejam atentos 💖. </center> </p>
-  </div>
-</div>
+    <div id="login-page">
+      <h1>Algo incrível está para chegar...</h1>
+      <p>Sentes-te pronto? Está difícil aguentar o calor 🥵</p>
+      <input type="password" id="password-input" placeholder="Adivinha" />
+      <br />
+      <button onclick="checkPassword()">Estou pronto 😏</button>
+      <p id="error-message" style="color: red;"></p>
 
-  <!-- Protected Content (your original page) -->
+      <p class="center"><strong>CERIMÓNIA CELEBRATÓRIA</strong> — 17 de Agosto</p>
+      <p class="center"><strong>DRESSCODE:</strong> Formal</p>
+      <p class="center">Mais informações em breve... Estejam atentos 💖.</p>
+    </div>
+  </div>
+
+  <!-- Protected Content -->
   <div id="protected-content">
     <div class="layout">
       <div class="left"></div>
       <div class="right">
-        <h2><center>Ranking Brincando com o Fogo</center></h2>
-        <table id="ranking-table">
-          <thead>
-            <tr>
-              <th>Concorrente</th>
-              <th>Pontos</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Miguel Inácio</td><td>0</td></tr>
-            <tr><td>Daniel Santos</td><td>0</td></tr>
-            <tr><td>Gabriel Gonçalves</td><td>0</td></tr>
-            <tr><td>Henrique Cruz</td><td>0</td></tr>
-            <tr><td>Hugo Mira</td><td>0</td></tr>
-            <tr><td>João Saraiva</td><td>0</td></tr>
-            <tr><td>João Lourenço</td><td>0</td></tr>
-            <tr><td>João Santos</td><td>0</td></tr>
-            <tr><td>Lourenço Bangy</td><td>0</td></tr>
-            <tr><td>Rafael Mendonça</td><td>0</td></tr>
-            <tr><td>Vasco Veigas</td><td>0</td></tr>
-            <tr><td>Inês Afonso</td><td>0</td></tr>
-            <tr><td>Inês Silva</td><td>0</td></tr>
-            <tr><td>Laura Sousa</td><td>0</td></tr>
-            <tr><td>Maria Inês Saraiva</td><td>0</td></tr>
-            <tr><td>Rita Alves</td><td>0</td></tr>
-            <tr><td>Sara Gomes</td><td>0</td></tr>
-            <tr><td>Sofia Gomes</td><td>0</td></tr>
-            <tr><td>Beatriz Apolinário</td><td>0</td></tr>
-            <tr><td>Madalena Diniz</td><td>0</td></tr>
-          </tbody>
-        </table>
+        <h2 class="center">Ranking Brincando com o Fogo</h2>
+
+        <div class="table-container">
+          <table id="ranking-table">
+            <thead>
+              <tr>
+                <th>Concorrente</th>
+                <th>Pontos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Miguel Inácio</td><td>0</td></tr>
+              <tr><td>Daniel Santos</td><td>0</td></tr>
+              <tr><td>Gabriel Gonçalves</td><td>0</td></tr>
+              <tr><td>Henrique Cruz</td><td>0</td></tr>
+              <tr><td>Hugo Mira</td><td>0</td></tr>
+              <tr><td>João Saraiva</td><td>0</td></tr>
+              <tr><td>João Lourenço</td><td>0</td></tr>
+              <tr><td>João Santos</td><td>0</td></tr>
+              <tr><td>Lourenço Bangy</td><td>0</td></tr>
+              <tr><td>Rafael Mendonça</td><td>0</td></tr>
+              <tr><td>Vasco Veigas</td><td>0</td></tr>
+              <tr><td>Inês Afonso</td><td>0</td></tr>
+              <tr><td>Inês Silva</td><td>0</td></tr>
+              <tr><td>Laura Sousa</td><td>0</td></tr>
+              <tr><td>Maria Inês Saraiva</td><td>0</td></tr>
+              <tr><td>Rita Alves</td><td>0</td></tr>
+              <tr><td>Sara Gomes</td><td>0</td></tr>
+              <tr><td>Sofia Gomes</td><td>0</td></tr>
+              <tr><td>Beatriz Apolinário</td><td>0</td></tr>
+              <tr><td>Madalena Diniz</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Table sorting script -->
@@ -196,7 +238,7 @@
 
   <!-- Password Check Script -->
   <script>
-    const correctPassword = "aquininguemsecome"; // Change this to your desired password
+    const correctPassword = "aquininguemsecome"; // altera se quiseres
 
     function checkPassword() {
       const input = document.getElementById("password-input").value;
@@ -214,6 +256,3 @@
 
 </body>
 </html>
-
-
-
