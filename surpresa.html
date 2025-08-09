@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algo incrível está para chegar...</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+	
+	
+	#login-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		background-image: url('Imagens/hearts.jpg'); /* ← update filename if needed */
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	
+    #login-page {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #login-page input {
+      padding: 10px;
+      width: 80%;
+      margin-bottom: 10px;
+    }
+
+    #login-page button {
+      padding: 10px 20px;
+    }
+
+    #protected-content {
+      display: none;
+    }
+	
+		.layout {
+	  display: flex;
+	  min-height: 100vh;
+	}
+
+	/* LEFT SIDE (Image) */
+	.left {
+	  flex: 1;
+	  background-image: url('Imagens/Rodri2.jpg'); /* Replace with your image path */
+	  background-size: contain;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-position: left;    /* centers image */
+	  background-attachment: scroll;
+	  min-height: 100%;
+	  position: relative;
+	}
+
+	/* RIGHT SIDE (Content) */
+	.right {
+	  position: relative;
+	  flex: 1;
+	  padding: 2rem;
+	  background-color: #ffffff;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: flex-start;
+	  overflow: auto;
+	  min-height: 100%;
+	  z-index: 1;
+	}
+
+	/* Transparent wallpaper layer */
+	.right::before {
+	  content: "";
+	  position: absolute;
+	  inset: 0;
+	  background-image: url('Imagens/hearts.jpg'); /* or an online link */
+	  background-repeat: repeat;
+	  background-size: contain;
+	  background-attachment: scroll;
+	  opacity: 0.1; /* 🔁 change this value from 0 (invisible) to 1 (fully visible) */
+	  z-index: 0;
+	  pointer-events: none;
+	}
+
+	h2 {
+	  margin-bottom: 1rem;
+	}
+
+	table {
+	  width: 100%;
+	  border-collapse: collapse;
+	  text-align: left;
+	}
+
+	th, td {
+	  padding: 12px;
+	  border-bottom: 1px solid #ccc;
+	}
+
+	th {
+	  background-color: #f0f0f0;
+	}
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div id="login-wrapper">
+  <div id="login-page">
+    <h1>Algo incrível está para chegar...</h1>
+    <p>Sentes-te pronto? Está difícil aguentar o calor 🥵</p>
+    <input type="password" id="password-input" placeholder="Adivinha" />
+    <br />
+    <button onclick="checkPassword()">Estou pronto 😏</button>
+    <p id="error-message" style="color: red;"></p>
+	<p> <strong> CERIMÓNIA CELEBRATÓRIA </strong> - 17 de Agosto </p>
+	<p class="center"> <strong> DRESSCODE: </strong> Formal </p>
+	<p class="center"> Mais informações em breve... Estejam atentos 💖. </center> </p>
+  </div>
+</div>
+
+  <!-- Protected Content (your original page) -->
+  <div id="protected-content">
+    <div class="layout">
+      <div class="left"></div>
+      <div class="right">
+        <h2><center>Ranking Brincando com o Fogo</center></h2>
+        <table id="ranking-table">
+          <thead>
+            <tr>
+              <th>Concorrente</th>
+              <th>Pontos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Miguel Inácio</td><td>0</td></tr>
+            <tr><td>Daniel Santos</td><td>0</td></tr>
+            <tr><td>Gabriel Gonçalves</td><td>0</td></tr>
+            <tr><td>Henrique Cruz</td><td>0</td></tr>
+            <tr><td>Hugo Mira</td><td>0</td></tr>
+            <tr><td>João Saraiva</td><td>0</td></tr>
+            <tr><td>João Lourenço</td><td>0</td></tr>
+            <tr><td>João Santos</td><td>0</td></tr>
+            <tr><td>Lourenço Bangy</td><td>0</td></tr>
+            <tr><td>Rafael Mendonça</td><td>0</td></tr>
+            <tr><td>Vasco Veigas</td><td>0</td></tr>
+            <tr><td>Inês Afonso</td><td>0</td></tr>
+            <tr><td>Inês Silva</td><td>0</td></tr>
+            <tr><td>Laura Sousa</td><td>0</td></tr>
+            <tr><td>Maria Inês Saraiva</td><td>0</td></tr>
+            <tr><td>Rita Alves</td><td>0</td></tr>
+            <tr><td>Sara Gomes</td><td>0</td></tr>
+            <tr><td>Sofia Gomes</td><td>0</td></tr>
+            <tr><td>Beatriz Apolinário</td><td>0</td></tr>
+            <tr><td>Madalena Diniz</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table sorting script -->
+      <script>
+        function sortTable() {
+          const table = document.getElementById('ranking-table');
+          const tbody = table.querySelector('tbody');
+          const rows = Array.from(tbody.querySelectorAll('tr'));
+
+          rows.sort((a, b) => {
+            const pointsA = parseInt(a.children[1].textContent);
+            const pointsB = parseInt(b.children[1].textContent);
+
+            if (pointsB !== pointsA) return pointsB - pointsA;
+
+            const nameA = a.children[0].textContent.trim().toLowerCase();
+            const nameB = b.children[0].textContent.trim().toLowerCase();
+            return nameA.localeCompare(nameB);
+          });
+
+          rows.forEach(row => tbody.appendChild(row));
+        }
+      </script>
+    </div>
+  </div>
+
+  <!-- Password Check Script -->
+  <script>
+    const correctPassword = "aquininguemsecome"; // Change this to your desired password
+
+    function checkPassword() {
+      const input = document.getElementById("password-input").value;
+      const error = document.getElementById("error-message");
+
+      if (input === correctPassword) {
+        document.getElementById("login-wrapper").style.display = "none";
+        document.getElementById("protected-content").style.display = "block";
+        sortTable();
+      } else {
+        error.textContent = "Não me parece que estejas 😘";
+      }
+    }
+  </script>
+
+</body>
+</html>
