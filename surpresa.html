@@ -26,7 +26,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100svh; /* better than 100vh on mobile */
+      min-height: 100svh;
       background-image: url('hearts.jpg');
       background-size: cover;
       background-position: center;
@@ -63,9 +63,9 @@
     /* LEFT (Image) */
     .left {
       flex: 1;
-      background-image: url('Rodri2.jpg'); /* update path if needed */
-      background-size: cover;           /* was contain */
-      background-position: center left; /* nicer crop */
+      background-image: url('Rodri2.jpg');
+      background-size: cover;
+      background-position: center left;
       background-repeat: no-repeat;
       min-height: 100%;
       position: relative;
@@ -106,7 +106,7 @@
       border-collapse: collapse;
       text-align: left;
       position: relative;
-      z-index: 1; /* above the ::before wallpaper */
+      z-index: 1;
       background: rgba(255,255,255,0.9);
       border-radius: 8px;
       overflow: hidden;
@@ -121,22 +121,33 @@
     /* NEW: responsive table wrapper */
     .table-container {
       width: 100%;
-      overflow-x: auto;                 /* horizontal scroll if needed */
+      overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
-    #ranking-table { min-width: 480px; } /* avoid over-squashing on phones */
+    #ranking-table { min-width: 480px; }
 
-    /* MOBILE */
+    /* MOBILE RULES CONTAINER */
+    .mobile-rules {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 1;
+    }
+
     @media (max-width: 900px) {
       .layout {
-        flex-direction: column;      /* stack instead of side-by-side */
+        flex-direction: column;
         min-height: 100svh;
       }
       .left {
         width: 100%;
-        min-height: 40vh;            /* give image some height on phones */
+        min-height: 40vh;
         background-size: cover;
-        background-position: center; /* nicer crop on small screens */
+        background-position: center;
       }
       .right {
         flex: unset;
@@ -144,6 +155,9 @@
         padding: 1rem;
       }
       th, td { padding: 10px; }
+      .mobile-rules {
+        display: block;
+      }
     }
 
     /* Extra small phones */
@@ -210,6 +224,17 @@
             </tbody>
           </table>
         </div>
+
+        <!-- Mobile-only rules -->
+        <div class="mobile-rules">
+          <h3>Regras</h3>
+          <ul>
+            <li>Todos devem seguir as instruções do apresentador.</li>
+            <li>O uso de telemóveis é permitido apenas nos intervalos.</li>
+            <li>Respeitar sempre os outros concorrentes.</li>
+          </ul>
+        </div>
+
       </div>
 
       <!-- Table sorting script -->
@@ -238,7 +263,7 @@
 
   <!-- Password Check Script -->
   <script>
-    const correctPassword = "aquininguemsecome"; // altera se quiseres
+    const correctPassword = "aquininguemsecome";
 
     function checkPassword() {
       const input = document.getElementById("password-input").value;
