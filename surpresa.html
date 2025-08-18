@@ -172,16 +172,16 @@
   <!-- Login Page -->
   <div id="login-wrapper">
     <div id="login-page">
-      <h1>CHEGOU O GRANDE DIA!</h1>
-      <p>Encontramo-nos mais logo... Venham bem vestidinhos hihihi</p>
-      <input type="password" id="password-input" placeholder="Talvez... caneças99? canecas_99? Algo assim..." />
+      <h1>GALA FINALIZADA!</h1>
+      <p>Boa sorte a todos os concorrentes!</p>
+      <input type="password" id="password-input" placeholder="O nome do programa em que estão a participar (sem espaços)." />
       <br />
-      <button onclick="checkPassword()">Desisto.</button>
+      <button onclick="checkPassword()">Agora sim.</button>
       <p id="error-message" style="color: red;"></p>
 
-      <p class="center"><strong>CERIMÓNIA CELEBRATÓRIA</strong> — 17 de Agosto (HOJE)</p>
+      <p class="center"><strong>CERIMÓNIA FINAL</strong> — 21 de Agosto</p>
       <p class="center"><strong>DRESSCODE:</strong> Formal</p>
-      <p class="center">Finalmente as tão desejadas informações... Após irem lavar os dentes, reúnam-se todos no Anfiteatro. Estarei à vossa espera. Ass: RdpC</p>
+      <p class="center">Rodri di Palma Cristiani conta com a vossa melhor prestação!</p>
     </div>
   </div>
 
@@ -274,7 +274,7 @@
 
   <!-- Password Check Script -->
   <script>
-    const correctPassword = "aquininguemsecome";
+    const correctPassword = "brincandocomofogo";
 
     function checkPassword() {
       const input = document.getElementById("password-input").value;
@@ -285,13 +285,14 @@
         document.getElementById("protected-content").style.display = "block";
         sortTable();
       } else {
-        error.textContent = "Beijo para as invejosas";
+        error.textContent = "Tenta outra vez";
       }
     }
   </script>
 
 </body>
 </html>
+
 
 
 
